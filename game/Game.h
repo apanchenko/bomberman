@@ -1,5 +1,7 @@
 #pragma once
 
+#include "World.h"
+
 class Game
 {
 public:
@@ -9,8 +11,9 @@ public:
   void Run();
 
 private:
-  struct SDL_Window*   window = nullptr;
-  struct SDL_Surface*  screenSurface = nullptr;
+  struct SDL_Window*  window = nullptr;
+  struct SDL_Surface* screenSurface = nullptr;
+  World               world;
 
   static const char*  TITLE;
   static const int    SCREEN_WIDTH = 900;

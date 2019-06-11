@@ -33,11 +33,15 @@ bool Game::Init()
 
 void Game::Run()
 {
-  SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+  Uint32 last_tick = SDL_GetTicks();
+  while (true)
+  {
+    Uint32 now = SDL_GetTicks();
+    world.Tick(now - last_tick);
+    last_tick = now;
 
-  SDL_UpdateWindowSurface(window);
-
-  SDL_Delay(5000);
+    SDL_Delay(16);
+  }
 
   SDL_Log("SDL OK!");
 }
