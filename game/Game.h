@@ -2,13 +2,14 @@
 
 #include "World.h"
 
+// Initialize and manage subsystems
 class Game
 {
 public:
   virtual ~Game();
-  bool Init();
 
-  void Run();
+  bool      Init();
+  void      Run();
 
 private:
   struct SDL_Window*  window = nullptr;

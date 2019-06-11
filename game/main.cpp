@@ -2,13 +2,8 @@
 #include <windows.h>
 #include "Game.h"
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nCmdShow)
+int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 {
-  hInstance;
-  hPrevInstance;
-  pCmdLine;
-  nCmdShow;
-
   Game game;
   if (game.Init())
   {
