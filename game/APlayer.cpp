@@ -1,7 +1,7 @@
 #include "APlayer.h"
 #include "Game.h"
 
-void APlayer::Tick(Game& game, Uint32)
+void APlayer::Tick(Game& game, Uint32 delta)
 {
   SDL_Event event;
 
@@ -20,4 +20,6 @@ void APlayer::Tick(Game& game, Uint32)
       //}
     }
   }
+
+  Base::Tick(game, delta);
 }

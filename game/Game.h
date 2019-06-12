@@ -1,7 +1,9 @@
 #pragma once
 
 #include "SDL.h"
-#include "Actor.h"
+
+class Actor;
+typedef std::unique_ptr<Actor> UActor;
 
 // Initialize and manage subsystems
 class Game
@@ -14,7 +16,7 @@ public:
   void                Quit();
 
   template<class A>
-  A*        SwitchScene()
+  A*                  SwitchScene()
   {
     scene = std::make_unique<A>();
     return static_cast<A*>(scene.get());

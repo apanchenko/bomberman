@@ -19,7 +19,7 @@ AMaze::AMaze()
       {
         cell = AddActor<ACellRoad>();
       }
-      cell->SetPosition(i * ACell::Size, j * ACell::Size);
+      cell->SetPos(i, j);
     }
   }
 

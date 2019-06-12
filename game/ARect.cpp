@@ -9,17 +9,17 @@ ARect::ARect()
   rect.h = 0;
 }
 
-ARect& ARect::SetPosition(int x, int y)
+ARect& ARect::SetCoord(SDL_Point coord)
 {
-  rect.x = x;
-  rect.y = y;
+  rect.x = coord.x;
+  rect.y = coord.y;
   return *this;
 }
 
-ARect& ARect::SetSize(int w, int h)
+ARect& ARect::SetSize(SDL_Point size)
 {
-  rect.w = w;
-  rect.h = h;
+  rect.w = size.x;
+  rect.h = size.y;
   return *this;
 }
 
@@ -33,8 +33,8 @@ ARect& ARect::SetColor(Uint8 r, Uint8 g, Uint8 b)
 
 void ARect::Tick(Game& game, Uint32 delta)
 {
-  SDL_SetRenderDrawColor(game.GetRenderer(), color_r, color_g, color_b, SDL_ALPHA_OPAQUE);
+  Base::Tick(game, delta);
 
-  delta;
+  SDL_SetRenderDrawColor(game.GetRenderer(), color_r, color_g, color_b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(game.GetRenderer(), &rect);
 } 

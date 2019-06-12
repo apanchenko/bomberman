@@ -1,6 +1,5 @@
 #include "Game.h"
-#include <SDL.h>
-#include "ActorMaze.h"
+#include "AMaze.h"
 
 const char* Game::TITLE = "Bomberman";
 
