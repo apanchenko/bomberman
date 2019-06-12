@@ -7,7 +7,7 @@ class ACellWall : public ACell
 public:
   ACellWall()
   {
-    SetColor(193, 69, 64); // brick color
+    SetColor(193, 193, 193); // concrete color
   }
 
   virtual bool CanPass() const override
