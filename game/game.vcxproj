@@ -141,15 +141,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ACharacter.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="APlayer.cpp" />
+    <ClCompile Include="ARect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="AMaze.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ACell.h" />
+    <ClInclude Include="ACharacter.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="APlayer.h" />
+    <ClInclude Include="ARect.h" />
+    <ClInclude Include="ACellRoad.h" />
+    <ClInclude Include="ACellWall.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="World.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="AMaze.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

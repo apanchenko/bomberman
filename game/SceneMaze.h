@@ -4,4 +4,7 @@ class SceneMaze
 {
 public:
   SceneMaze();
+
+private:
+
 };

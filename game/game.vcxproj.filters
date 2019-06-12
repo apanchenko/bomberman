@@ -3,12 +3,21 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AMaze.cpp" />
+    <ClCompile Include="ARect.cpp" />
+    <ClCompile Include="APlayer.cpp" />
+    <ClCompile Include="ACharacter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="AMaze.h" />
+    <ClInclude Include="ARect.h" />
+    <ClInclude Include="ACell.h" />
+    <ClInclude Include="ACellWall.h" />
+    <ClInclude Include="ACellRoad.h" />
+    <ClInclude Include="APlayer.h" />
+    <ClInclude Include="ACharacter.h" />
   </ItemGroup>
 </Project>
