@@ -18,6 +18,7 @@ public:
   void          SetSpeed(Uint32 _speed) { speed = _speed; }
 
   // move in certain direction
+  bool          GetCanMove(Dir dir);
   void          Move(Dir dir, Uint32 duration);
 
   virtual void  Tick(Game& game) override;

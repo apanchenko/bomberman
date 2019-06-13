@@ -17,7 +17,6 @@ private:
   void          ProcessInputEvents(Game& game);
   void          ApplyForce(Game& game);
   Dir           GetDirection(SDL_KeyboardEvent key) const;
-  //Dir           GetLastForce() const;
 
   std::list<Force> forces;
 };

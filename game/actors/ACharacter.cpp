@@ -1,4 +1,14 @@
 #include "ACharacter.h"
+#include "AMaze.h"
+
+bool ACharacter::GetCanMove(Dir dir)
+{
+  ACell* target = maze->GetCell(GetPos() + dir);
+  if (target == nullptr)
+    return false;
+
+  return !target->IsSolid();
+}
 
 void ACharacter::Move(Dir dir, Uint32 duration)
 {

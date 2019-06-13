@@ -1,7 +1,7 @@
 #include "ACell.h"
 
 ACell::ACell()
-  : solid(false)
+  : is_solid(false)
 {
   SetSize(Pos(Size, Size));
 }

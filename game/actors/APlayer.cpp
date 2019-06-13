@@ -24,7 +24,7 @@ void APlayer::ProcessInputEvents(Game& game)
       Dir dir = GetDirection(event.key);
       if (dir != Dir::None)
       {
-        forces.push_back(Force(dir, event.key.timestamp));
+        forces.push_front(Force(dir, event.key.timestamp));
       }
     }
     else if (event.type == SDL_KEYUP)
@@ -35,7 +35,7 @@ void APlayer::ProcessInputEvents(Game& game)
         forces.remove_if([dir](auto force) { return force.dir == dir; });
         if (!forces.empty())
         {
-          forces.back().start = game.GetNow();
+          forces.front().start = game.GetNow();
         }
       }
     }
@@ -48,13 +48,18 @@ void APlayer::ProcessInputEvents(Game& game)
 
 void APlayer::ApplyForce(Game& game)
 {
-  // find priority moving action by largest timestamp (last)
-  if (!forces.empty())
+  // find force in valid direction by largest timestamp (last)
+  for (auto force : forces)
   {
-    Force force = forces.back();
-    Move(force.dir, game.GetNow() - force.start); // apply force during time passed
-    force.start = game.GetNow(); // update force start moment
-    forces.push_back(force);
+    if (GetCanMove(force.dir))
+    {
+      // apply force during time passed
+      const Force& force = forces.front();
+      Move(force.dir, game.GetNow() - force.start);
+      // update force start moment
+      force.start = game.GetNow();
+      break;
+    }
   }
 }
 

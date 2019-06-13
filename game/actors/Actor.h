@@ -19,6 +19,13 @@ public:
     return static_cast<A*>(actors.back().get());
   }
 
+  Actor* GetActor(int index) const
+  {
+    if (index < 0 || index >= actors.size())
+      return nullptr;
+    return actors[index].get();
+  }
+
   virtual void Tick(Game& game);
 
 private:

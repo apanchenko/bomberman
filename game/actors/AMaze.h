@@ -4,10 +4,11 @@
 class AMaze : public Actor
 {
 public:
-  static const int Width  = 27;
-  static const int Height = 13;
-
   AMaze();
 
+  Pos           GetSize() const { return size; }
+  ACell*        GetCell(Pos pos) const;
 
+private:
+  const Pos     size;
 };
