@@ -1,10 +1,11 @@
 #include "APlayer.h"
 #include "../Game.h"
+#include <algorithm>
 
 APlayer::APlayer()
 {
   SetColor(200, 100, 100);
-  SetSpeed(150);
+  SetSpeed(300);
 }
 
 void APlayer::Tick(Game& game)
@@ -24,7 +25,11 @@ void APlayer::ProcessInputEvents(Game& game)
       Dir dir = GetDirection(event.key);
       if (dir != Dir::None)
       {
-        forces.push_front(Force(dir, event.key.timestamp));
+        forces[(int)dir] = Interval(event.key.timestamp);
+      }
+      else if (event.key.keysym.sym == SDLK_ESCAPE)
+      {
+        game.Quit();
       }
     }
     else if (event.type == SDL_KEYUP)
@@ -32,11 +37,7 @@ void APlayer::ProcessInputEvents(Game& game)
       Dir dir = GetDirection(event.key);
       if (dir != Dir::None)
       {
-        forces.remove_if([dir](auto force) { return force.dir == dir; });
-        if (!forces.empty())
-        {
-          forces.front().start = game.GetNow();
-        }
+        forces[(int)dir].stop = game.GetNow();
       }
     }
     else if (event.type == SDL_QUIT)
@@ -48,17 +49,17 @@ void APlayer::ProcessInputEvents(Game& game)
 
 void APlayer::ApplyForce(Game& game)
 {
-  // find force in valid direction by largest timestamp (last)
-  for (auto force : forces)
+  for (int d = 0; d < bb::DIRCOUNT; ++d)
   {
-    if (GetCanMove(force.dir))
+    Interval& force = forces[d];
+    
+    // calculate force duration during last frame
+    bb::Time start = std::max(force.start, game.GetStartFrame());
+    bb::Time stop = std::min(force.stop, game.GetNow());
+    if (start < stop)
     {
-      // apply force during time passed
-      const Force& force = forces.front();
-      Move(force.dir, game.GetNow() - force.start);
-      // update force start moment
-      force.start = game.GetNow();
-      break;
+      // apply force
+      Move((Dir)d, stop - start);
     }
   }
 }

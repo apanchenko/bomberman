@@ -1,33 +1,89 @@
 #include "ACharacter.h"
 #include "AMaze.h"
 
-bool ACharacter::GetCanMove(Dir dir)
+bool ACharacter::GetCanMove(Pos to) const
 {
-  ACell* target = maze->GetCell(GetPos() + dir);
-  if (target == nullptr)
-    return false;
-
-  return !target->IsSolid();
+  ACell* target = maze->GetCell(to);
+  return target != nullptr && !target->IsSolid();
 }
 
-void ACharacter::Move(Dir dir, Uint32 duration)
+bool ACharacter::Move(Dir dir, bb::Time duration)
 {
-  // displacement in 1000 pixels
-  int path = duration * speed;
+  Pos pos = GetPos();
+  Pos shift = GetShift();
 
-  // apply path to sub_shift in direction requested
+  if (!GetCanMove(pos + dir))
+    return false;
+
+  Dir shift_dir = shift.ToDir();
+  if (dir != shift_dir && !GetCanMove(pos + shift_dir + dir))
+    return false;
+
+  // displacement in pixels
+  int path = duration * speed / 1000;
+
+  // apply path in direction requested
   switch (dir)
   {
-  case Dir::Up:    sub_shift.y -= path;    break;
-  case Dir::Right: sub_shift.x += path;    break;
-  case Dir::Down:  sub_shift.y += path;    break;
-  case Dir::Left:  sub_shift.x -= path;    break;
+  case Dir::Up:
+    if (path - shift.y < Size)
+    {
+      shift.y -= path;
+      path = 0;
+    }
+    else
+    {
+      pos.y -= 1;
+      shift.y = 0;
+      path -= Size + shift.y;
+    }
+    break;
+
+  case Dir::Right:
+    if (path + shift.x < Size)
+    {
+      shift.x += path;
+      path = 0;
+    }
+    else
+    {
+      pos.x += 1;
+      shift.x = 0;
+      path -= Size - shift.x;
+    }
+    break;
+
+  case Dir::Down:
+    if (path + shift.y < Size)
+    {
+      shift.y += path;
+      path = 0;
+    }
+    else
+    {
+      pos.y += 1;
+      shift.y = 0;
+      path -= Size - shift.y;
+    }
+    break;
+
+  case Dir::Left:
+    if (path - shift.x < Size)
+    {
+      shift.x -= path;
+      path = 0;
+    }
+    else
+    {
+      pos.x -= 1;
+      shift.x = 0;
+      path -= Size + shift.x;
+    }
+    break;
   }
 
-  // convert to pixels and move
-  Shift(sub_shift / 1000);
-
-  sub_shift %= 1000;
+  SetShift(shift);
+  SetPos(pos);
 }
 
 void ACharacter::Tick(Game& game)

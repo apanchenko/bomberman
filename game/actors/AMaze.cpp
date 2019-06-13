@@ -4,7 +4,7 @@
 #include "APlayer.h"
 
 AMaze::AMaze()
-  : size(27, 13)
+  : size(23, 13)
 {
   for (int i = 0; i < size.x; ++i)
   {
@@ -24,13 +24,16 @@ AMaze::AMaze()
     }
   }
 
-  AddActor<APlayer>();
+  // spawn player
+  auto player = AddActor<APlayer>();
+  player->SetMaze(this);
+  player->SetPos(Pos(1, 1));
 }
 
 ACell* AMaze::GetCell(Pos pos) const
 {
   // check maze bounds
-  if (pos.IsIn(size))
+  if (!pos.IsIn(size))
     return nullptr;
 
   // get cell at target position

@@ -14,8 +14,9 @@ public:
   void                Run();
   void                Quit();
 
-  Uint32              GetNow() const { return time_now; }
-  Uint32              GetFrameDuration() const { return frame_duration; }
+  Uint32              GetStartFrame()     const { return time_now - frame_duration; }
+  Uint32              GetNow()            const { return time_now; }
+  Uint32              GetFrameDuration()  const { return frame_duration; }
 
   template<class A>
   A*                  SwitchScene()
@@ -36,6 +37,6 @@ private:
   Uint32              frame_duration = 0;
 
   static const char*  TITLE;
-  static const int    SCREEN_WIDTH  = 900;
-  static const int    SCREEN_HEIGHT = 832;
+  static const int    SCREEN_WIDTH  = 1150;
+  static const int    SCREEN_HEIGHT = 650;
 };

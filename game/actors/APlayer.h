@@ -2,7 +2,7 @@
 #include "ACharacter.h"
 #include <map>
 #include "../types/Force.h"
-#include <list>
+#include <array>
 
 class APlayer : public ACharacter
 {
@@ -18,6 +18,6 @@ private:
   void          ApplyForce(Game& game);
   Dir           GetDirection(SDL_KeyboardEvent key) const;
 
-  std::list<Force> forces;
+  std::array<Interval, bb::DIRCOUNT> forces;
 };
 

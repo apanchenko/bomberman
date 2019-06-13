@@ -14,15 +14,15 @@ public:
   ACell();
 
   void          SetSolid(bool _solid)   { is_solid = _solid; }
-  void          SetPos(Pos _pos)        { pos = _pos; }
-  void          SetShift(Pos _shift)    { shift = _shift; }
-  void          Shift(Pos _shift)       { shift += _shift; }
+  void          SetPos(Pos _pos);
+  void          SetShift(Pos _shift);
 
   Pos           GetPos() const          { return pos; }
+  Pos           GetShift() const        { return shift; }
   bool          IsSolid() const         { return is_solid; }
 
   // square cell size equal for all cells
-  static const int Size = 64;
+  static const int Size = 50;
 
   virtual void  Tick(Game& game) override;
 

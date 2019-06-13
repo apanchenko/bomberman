@@ -8,3 +8,8 @@ enum class Dir
   Left  = 3,
   None
 };
+
+namespace bb
+{
+  static const int DIRCOUNT = 4;
+}

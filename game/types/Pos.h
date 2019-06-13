@@ -31,6 +31,15 @@ struct Pos
     return *this;
   }
 
+  Dir ToDir() const
+  {
+    if (x > 0) return Dir::Right;
+    if (x < 0) return Dir::Left;
+    if (y > 0) return Dir::Down;
+    if (y < 0) return Dir::Up;
+    return Dir::None;
+  }
+
   // check if this pos is inside zero based rectangle with size
   bool IsIn(Pos size)
   {

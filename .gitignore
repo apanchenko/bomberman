@@ -1,3 +1,6 @@
 .vs
 .temp
 .vscode
+*.exe
+*.ilk
+*.pdb

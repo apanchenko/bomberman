@@ -54,10 +54,10 @@
     <ClInclude Include="actors\ARect.h">
       <Filter>actors</Filter>
     </ClInclude>
-    <ClInclude Include="types\Force.h">
+    <ClInclude Include="types\Types.h">
       <Filter>types</Filter>
     </ClInclude>
-    <ClInclude Include="types\Types.h">
+    <ClInclude Include="types\Interval.h">
       <Filter>types</Filter>
     </ClInclude>
   </ItemGroup>

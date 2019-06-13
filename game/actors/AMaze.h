@@ -1,5 +1,8 @@
 #pragma once
 #include "Actor.h"
+#include "../types/Pos.h"
+
+class ACell;
 
 class AMaze : public Actor
 {
