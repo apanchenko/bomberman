@@ -18,6 +18,6 @@ public:
   {}
 
   Dir       dir;
-  bb::Time  start;
+  mutable bb::Time  start;
   bb::Time  stop;
 };

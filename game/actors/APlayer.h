@@ -17,10 +17,8 @@ private:
   void          ProcessInputEvents(Game& game);
   void          ApplyForce(Game& game);
   Dir           GetDirection(SDL_KeyboardEvent key) const;
-  Dir           GetLastForce() const;
+  //Dir           GetLastForce() const;
 
-  // move actions 
-  std::map<Dir, Force> forces;
-  //std::list<Force>
+  std::list<Force> forces;
 };
 
