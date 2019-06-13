@@ -1,5 +1,5 @@
 #include "ARect.h"
-#include "Game.h"
+#include "../Game.h"
 
 ARect::ARect()
 {
@@ -9,31 +9,28 @@ ARect::ARect()
   rect.h = 0;
 }
 
-ARect& ARect::SetCoord(SDL_Point coord)
+void ARect::SetCoord(Pos coord)
 {
   rect.x = coord.x;
   rect.y = coord.y;
-  return *this;
 }
 
-ARect& ARect::SetSize(SDL_Point size)
+void ARect::SetSize(Pos size)
 {
   rect.w = size.x;
   rect.h = size.y;
-  return *this;
 }
 
-ARect& ARect::SetColor(Uint8 r, Uint8 g, Uint8 b)
+void ARect::SetColor(Uint8 r, Uint8 g, Uint8 b)
 {
   color_r = r;
   color_g = g;
   color_b = b;
-  return *this;
 }
 
-void ARect::Tick(Game& game, Uint32 delta)
+void ARect::Tick(Game& game)
 {
-  Base::Tick(game, delta);
+  Base::Tick(game);
 
   SDL_SetRenderDrawColor(game.GetRenderer(), color_r, color_g, color_b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(game.GetRenderer(), &rect);

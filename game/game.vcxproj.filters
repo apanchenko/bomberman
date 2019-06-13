@@ -3,21 +3,70 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="AMaze.cpp" />
-    <ClCompile Include="ARect.cpp" />
-    <ClCompile Include="APlayer.cpp" />
-    <ClCompile Include="ACharacter.cpp" />
+    <ClCompile Include="actors\ACell.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\ACharacter.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\Actor.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\AMaze.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\APlayer.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\ARect.cpp">
+      <Filter>actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="AMaze.h" />
-    <ClInclude Include="ARect.h" />
-    <ClInclude Include="ACell.h" />
-    <ClInclude Include="ACellWall.h" />
-    <ClInclude Include="ACellRoad.h" />
-    <ClInclude Include="APlayer.h" />
-    <ClInclude Include="ACharacter.h" />
+    <ClInclude Include="types\Dir.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\Pos.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\ACell.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\ACellRoad.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\ACellWall.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\ACharacter.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\Actor.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\AMaze.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\APlayer.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\ARect.h">
+      <Filter>actors</Filter>
+    </ClInclude>
+    <ClInclude Include="types\Force.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\Types.h">
+      <Filter>types</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="types">
+      <UniqueIdentifier>{89cfe889-8911-4c18-b3c4-653c054107b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="actors">
+      <UniqueIdentifier>{a93090ea-e636-4e12-b116-6eedd6958619}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

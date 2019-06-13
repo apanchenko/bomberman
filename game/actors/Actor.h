@@ -19,7 +19,7 @@ public:
     return static_cast<A*>(actors.back().get());
   }
 
-  virtual void Tick(Game& game, Uint32 delta);
+  virtual void Tick(Game& game);
 
 private:
   std::vector<UActor> actors;

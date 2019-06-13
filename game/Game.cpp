@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "AMaze.h"
+#include "actors/AMaze.h"
 
 const char* Game::TITLE = "Bomberman";
 
@@ -47,14 +47,15 @@ bool Game::Init()
 
 void Game::Run()
 {
-  Uint32 last_tick = SDL_GetTicks();
+  Uint32 time_last = SDL_GetTicks();
   while (!quit)
   {
     SDL_RenderClear(renderer);
 
-    Uint32 now = SDL_GetTicks();
-    scene->Tick(*this, now - last_tick);
-    last_tick = now;
+    time_now = SDL_GetTicks();
+    frame_duration = time_now - time_last;
+    scene->Tick(*this);
+    time_last = time_now;
 
     SDL_RenderPresent(renderer);
     SDL_Delay(16);

@@ -141,24 +141,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ACharacter.cpp" />
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="APlayer.cpp" />
-    <ClCompile Include="ARect.cpp" />
+    <ClCompile Include="actors\ACell.cpp" />
+    <ClCompile Include="actors\ACharacter.cpp" />
+    <ClCompile Include="actors\Actor.cpp" />
+    <ClCompile Include="actors\AMaze.cpp" />
+    <ClCompile Include="actors\APlayer.cpp" />
+    <ClCompile Include="actors\ARect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="AMaze.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ACell.h" />
-    <ClInclude Include="ACharacter.h" />
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="APlayer.h" />
-    <ClInclude Include="ARect.h" />
-    <ClInclude Include="ACellRoad.h" />
-    <ClInclude Include="ACellWall.h" />
+    <ClInclude Include="actors\ACell.h" />
+    <ClInclude Include="actors\ACellRoad.h" />
+    <ClInclude Include="actors\ACellWall.h" />
+    <ClInclude Include="actors\ACharacter.h" />
+    <ClInclude Include="actors\Actor.h" />
+    <ClInclude Include="actors\AMaze.h" />
+    <ClInclude Include="actors\APlayer.h" />
+    <ClInclude Include="actors\ARect.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="AMaze.h" />
+    <ClInclude Include="types\Dir.h" />
+    <ClInclude Include="types\Force.h" />
+    <ClInclude Include="types\Pos.h" />
+    <ClInclude Include="types\Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
