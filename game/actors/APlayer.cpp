@@ -5,7 +5,7 @@
 APlayer::APlayer()
 {
   SetColor(200, 100, 100);
-  SetSpeed(300);
+  SetSpeed(90);
 }
 
 void APlayer::Tick(Game& game)
@@ -61,9 +61,8 @@ void APlayer::ApplyForce(Game& game)
   for (Force& force : copy)
   {    
     // calculate force duration during last frame
-    bb::Time start = std::clamp(force.start, game.GetStartFrame(), game.GetNow());
-    bb::Time stop  = std::clamp(force.stop, game.GetStartFrame(), game.GetNow());
-    
+    bb::Time start = std::clamp(force.start, game.GetStartFrame(), game.Now());
+    bb::Time stop  = std::clamp(force.stop, game.GetStartFrame(), game.Now());
     if (start < stop)
     {
       // apply force
@@ -124,10 +123,10 @@ Dir APlayer::GetDirection(SDL_KeyboardEvent key) const
 
 bool APlayer::IsMoving(Game& game) const
 {
-  // find non-finished force
+  // find non-finished force in available direction
   for (auto& force : forces)
   {
-    if (force.stop > game.GetNow())
+    if (force.stop > game.Now() && CanMove(force.dir))
       return true;
   }
   return false;

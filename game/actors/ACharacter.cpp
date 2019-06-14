@@ -1,8 +1,7 @@
 #include "ACharacter.h"
 #include "AMaze.h"
 
-
-bool ACharacter::Move(Dir dir, bb::Time duration)
+bool ACharacter::CanMove(Dir dir) const
 {
   Pos pos = GetPos();
   Pos shift = GetShift();
@@ -16,10 +15,20 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
   if (dir != shift_dir && maze->IsSolid(pos + shift_dir + dir))
     return false;
 
+  return true;
+}
+
+bool ACharacter::Move(Dir dir, bb::Time duration)
+{
+  if (!CanMove(dir))
+    return false;
+
   // displacement in pixels
   int path = duration * speed / 1000;
 
   // apply path in direction requested
+  Pos pos = GetPos();
+  Pos shift = GetShift();
   while (path > 0)
   switch (dir)
   {

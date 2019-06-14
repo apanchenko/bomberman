@@ -15,7 +15,7 @@ public:
   void                Quit();
 
   Uint32              GetStartFrame()     const { return time_now - frame_duration; }
-  Uint32              GetNow()            const { return time_now; }
+  Uint32              Now()            const { return time_now; }
   Uint32              GetFrameDuration()  const { return frame_duration; }
 
   template<class A>
