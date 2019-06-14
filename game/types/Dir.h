@@ -13,3 +13,6 @@ namespace bb
 {
   static const int DIRCOUNT = 4;
 }
+
+// TODO: initialize by default to None
+// TODO: random_dir function

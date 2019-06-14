@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "actors/AMaze.h"
+#include <ctime>
 
 const char* Game::TITLE = "Bomberman";
 
@@ -38,6 +39,9 @@ bool Game::Init()
     SDL_Log("Failed to create renderer: %s", SDL_GetError());
     return false;
   }
+
+  // init random numbers
+  ::srand((int) std::time(nullptr));
 
   screenSurface = SDL_GetWindowSurface(window);
 

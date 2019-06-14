@@ -18,7 +18,7 @@ bool ACharacter::CanMove(Dir dir) const
   return true;
 }
 
-bool ACharacter::Move(Dir dir, bb::Time duration)
+bool ACharacter::Move(Dir dir, bb::Time duration, bool stop_at_next_pos)
 {
   if (!CanMove(dir))
     return false;
@@ -42,7 +42,10 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
     {
       pos.y -= 1;
       shift.y = 0;
-      path -= Size + shift.y;
+      if (stop_at_next_pos)
+        path = 0;
+      else
+        path -= Size + shift.y;
     }
     break;
 
@@ -56,7 +59,10 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
     {
       pos.x += 1;
       shift.x = 0;
-      path -= Size - shift.x;
+      if (stop_at_next_pos)
+        path = 0;
+      else
+        path -= Size - shift.x;
     }
     break;
 
@@ -70,7 +76,10 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
     {
       pos.y += 1;
       shift.y = 0;
-      path -= Size - shift.y;
+      if (stop_at_next_pos)
+        path = 0;
+      else
+        path -= Size - shift.y;
     }
     break;
 
@@ -84,7 +93,10 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
     {
       pos.x -= 1;
       shift.x = 0;
-      path -= Size + shift.x;
+      if (stop_at_next_pos)
+        path = 0;
+      else
+        path -= Size + shift.x;
     }
     break;
   }

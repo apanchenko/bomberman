@@ -13,10 +13,10 @@ class Actor
 public:
 
   template<class A>
-  A* AddActor()
+  A* Spawn()
   {
-    actors.push_back(std::make_unique<A>());
-    return static_cast<A*>(actors.back().get());
+    new_actors.push_back(std::make_unique<A>());
+    return static_cast<A*>(new_actors.back().get());
   }
 
   Actor* GetActor(int index) const
@@ -26,9 +26,16 @@ public:
     return actors[index].get();
   }
 
-  virtual void Tick(Game& game);
+  virtual void  Tick(Game& game);
+
+protected:
+  void          AdaptNewChildren();
 
 private:
   std::vector<UActor> actors;
+  std::vector<UActor> new_actors;
 };
+
+
+// TODO: separate base and container actors
 

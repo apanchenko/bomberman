@@ -147,6 +147,7 @@
     <ClCompile Include="actors\AMaze.cpp" />
     <ClCompile Include="actors\APlayer.cpp" />
     <ClCompile Include="actors\ARect.cpp" />
+    <ClCompile Include="actors\ARoamingFoe.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="actors\AMaze.h" />
     <ClInclude Include="actors\APlayer.h" />
     <ClInclude Include="actors\ARect.h" />
+    <ClInclude Include="actors\ARoamingFoe.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="types\Dir.h" />
     <ClInclude Include="types\Force.h" />

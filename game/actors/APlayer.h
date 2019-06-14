@@ -8,9 +8,6 @@ class APlayer : public ACharacter
 {
 private:
   typedef ACharacter Base;
-  typedef std::array<Force, bb::DIRCOUNT> ForceArray;
-
-  static const int Snap = Size / 1;
 
 public:
   APlayer();
@@ -23,6 +20,9 @@ private:
   Dir           GetDirection(SDL_KeyboardEvent key) const;
   bool          IsMoving(Game& game) const;
 
-  ForceArray    forces;
+  static const int Snap = Size / 1;
+
+  std::array<Force, bb::DIRCOUNT> forces;
 };
 
+// TODO: snap to nearest pos, not original

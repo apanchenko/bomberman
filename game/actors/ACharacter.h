@@ -5,21 +5,21 @@
 
 class AMaze;
 
-// Character actor
-//   - can move in maze
+// Character
+//   - moves in maze
 class ACharacter : public ACell
 {
 private:
   typedef ACell Base;
 
 public:
-  Uint32        GetSpeed() const { return speed; }
-  bool          CanMove(Dir dir) const;
-    
+  Uint32        GetSpeed()        const { return speed; }
+  AMaze*        Maze()            const { return maze; }
+  bool          CanMove(Dir dir)  const;
+ 
   void          SetMaze(AMaze* _maze)  { maze = _maze; }
   void          SetSpeed(Uint32 _speed) { speed = _speed; }
-  bool          Move(Dir dir, bb::Time duration);
-
+  bool          Move(Dir dir, bb::Time duration, bool stop_at_next_pos);
   virtual void  Tick(Game& game) override;
 
 private:
