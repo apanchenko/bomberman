@@ -1,21 +1,21 @@
 #include "ACell.h"
 
 ACell::ACell()
-  : is_solid(false)
+  : m_is_solid(false)
 {
   SetSize(Pos(Size, Size));
 }
 
-void ACell::SetPos(Pos _pos)
+void ACell::SetPos(Pos pos)
 {
-  pos = _pos;
-  SetCoord(pos * Size + shift);
+  m_pos = pos;
+  SetCoord(m_pos * Size + m_shift);
 }
 
-void ACell::SetShift(Pos _shift)
+void ACell::SetShift(Pos shift)
 {
-  shift = _shift;
-  SetCoord(pos * Size + shift);
+  m_shift = shift;
+  SetCoord(m_pos * Size + m_shift);
 }
 
 void ACell::Tick(Game& game)

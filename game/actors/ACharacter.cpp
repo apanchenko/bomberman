@@ -1,28 +1,26 @@
 #include "ACharacter.h"
 #include "AMaze.h"
 
-bool ACharacter::GetCanMove(Pos to) const
-{
-  ACell* target = maze->GetCell(to);
-  return target != nullptr && !target->IsSolid();
-}
 
 bool ACharacter::Move(Dir dir, bb::Time duration)
 {
   Pos pos = GetPos();
   Pos shift = GetShift();
+  Dir shift_dir = shift.ToDir();
 
-  if (!GetCanMove(pos + dir))
+  bool opposite = dir != shift_dir && ((int)dir % 2) == ((int)shift_dir % 2);
+
+  if (!opposite && maze->IsSolid(pos + dir))
     return false;
 
-  Dir shift_dir = shift.ToDir();
-  if (dir != shift_dir && !GetCanMove(pos + shift_dir + dir))
+  if (dir != shift_dir && maze->IsSolid(pos + shift_dir + dir))
     return false;
 
   // displacement in pixels
   int path = duration * speed / 1000;
 
   // apply path in direction requested
+  while (path > 0)
   switch (dir)
   {
   case Dir::Up:
@@ -84,6 +82,7 @@ bool ACharacter::Move(Dir dir, bb::Time duration)
 
   SetShift(shift);
   SetPos(pos);
+  return true;
 }
 
 void ACharacter::Tick(Game& game)

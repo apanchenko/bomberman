@@ -13,11 +13,11 @@ private:
   typedef ACell Base;
 
 public:
-  bool          GetCanMove(Pos to) const;
-
   void          SetMaze(AMaze* _maze)  { maze = _maze; }
   void          SetSpeed(Uint32 _speed) { speed = _speed; }
   bool          Move(Dir dir, bb::Time duration);
+
+  Uint32        GetSpeed() const { return speed; }
 
   virtual void  Tick(Game& game) override;
 

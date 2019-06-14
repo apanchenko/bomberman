@@ -13,13 +13,13 @@ private:
 public:
   ACell();
 
-  void          SetSolid(bool _solid)   { is_solid = _solid; }
-  void          SetPos(Pos _pos);
-  void          SetShift(Pos _shift);
+  void          SetSolid(bool solid)   { m_is_solid = solid; }
+  void          SetPos(Pos pos);
+  void          SetShift(Pos shift);
 
-  Pos           GetPos() const          { return pos; }
-  Pos           GetShift() const        { return shift; }
-  bool          IsSolid() const         { return is_solid; }
+  Pos           GetPos() const          { return m_pos; }
+  Pos           GetShift() const        { return m_shift; }
+  bool          IsSolid() const         { return m_is_solid; }
 
   // square cell size equal for all cells
   static const int Size = 50;
@@ -27,7 +27,7 @@ public:
   virtual void  Tick(Game& game) override;
 
 private:
-  Pos           pos;      // position in maze grid
-  Pos           shift;    // shift from pos in pixels
-  bool          is_solid; // characters can pass through this cell
+  Pos           m_pos;      // position in maze grid
+  Pos           m_shift;    // shift from pos in pixels
+  bool          m_is_solid; // characters can pass through this cell
 };

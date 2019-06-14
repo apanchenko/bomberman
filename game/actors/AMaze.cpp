@@ -39,3 +39,9 @@ ACell* AMaze::GetCell(Pos pos) const
   // get cell at target position
   return static_cast<ACell*>(GetActor(pos.x * size.y + pos.y));
 }
+
+bool AMaze::IsSolid(Pos pos) const
+{
+  ACell* target = GetCell(pos);
+  return target == nullptr || target->IsSolid();
+}

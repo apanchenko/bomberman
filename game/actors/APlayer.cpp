@@ -11,7 +11,10 @@ APlayer::APlayer()
 void APlayer::Tick(Game& game)
 {
   ProcessInputEvents(game);
-  ApplyForce(game);
+  if (IsMoving(game))
+    ApplyForce(game);
+  else
+    ApplySnapForce(game);
   Base::Tick(game);
 }
 
@@ -25,7 +28,7 @@ void APlayer::ProcessInputEvents(Game& game)
       Dir dir = GetDirection(event.key);
       if (dir != Dir::None)
       {
-        forces[(int)dir] = Interval(event.key.timestamp);
+        forces[(int)dir] = Force(dir, event.key.timestamp);
       }
       else if (event.key.keysym.sym == SDLK_ESCAPE)
       {
@@ -37,7 +40,7 @@ void APlayer::ProcessInputEvents(Game& game)
       Dir dir = GetDirection(event.key);
       if (dir != Dir::None)
       {
-        forces[(int)dir].stop = game.GetNow();
+        forces[(int)dir].stop = event.key.timestamp;
       }
     }
     else if (event.type == SDL_QUIT)
@@ -49,19 +52,51 @@ void APlayer::ProcessInputEvents(Game& game)
 
 void APlayer::ApplyForce(Game& game)
 {
-  for (int d = 0; d < bb::DIRCOUNT; ++d)
+  auto copy = forces;
+  std::sort(copy.begin(), copy.end(), [](const Force& a, const Force& b)
   {
-    Interval& force = forces[d];
-    
+    return a.start > b.start;
+  });
+
+  for (Force& force : copy)
+  {    
     // calculate force duration during last frame
-    bb::Time start = std::max(force.start, game.GetStartFrame());
-    bb::Time stop = std::min(force.stop, game.GetNow());
+    bb::Time start = std::clamp(force.start, game.GetStartFrame(), game.GetNow());
+    bb::Time stop  = std::clamp(force.stop, game.GetStartFrame(), game.GetNow());
+    
     if (start < stop)
     {
       // apply force
-      Move((Dir)d, stop - start);
+      Move(force.dir, stop - start);
     }
   }
+}
+
+void APlayer::ApplySnapForce(Game& game)
+{
+  // max distance player can move in this frame
+  int path = game.GetFrameDuration() * GetSpeed() / 1000;
+
+  Pos shift = GetShift();
+  if (shift.x > 0 && shift.x < Snap)
+  {
+    shift.x -= std::min(shift.x, path);
+  }
+  else if (shift.x < 0 && shift.x > -Snap)
+  {
+    shift.x += std::min(-shift.x, path);
+  }
+
+  if (shift.y > 0 && shift.y < Snap)
+  {
+    shift.y -= std::min(shift.y, path);
+  }
+  else if (shift.y < 0 && shift.y > -Snap)
+  {
+    shift.y += std::min(-shift.y, path);
+  }
+
+  SetShift(shift);
 }
 
 Dir APlayer::GetDirection(SDL_KeyboardEvent key) const
@@ -85,4 +120,15 @@ Dir APlayer::GetDirection(SDL_KeyboardEvent key) const
   }
 
   return Dir::None;
+}
+
+bool APlayer::IsMoving(Game& game) const
+{
+  // find non-finished force
+  for (auto& force : forces)
+  {
+    if (force.stop > game.GetNow())
+      return true;
+  }
+  return false;
 }

@@ -11,6 +11,7 @@ public:
 
   Pos           GetSize() const { return size; }
   ACell*        GetCell(Pos pos) const;
+  bool          IsSolid(Pos pos) const;
 
 private:
   const Pos     size;

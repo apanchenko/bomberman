@@ -161,7 +161,7 @@
     <ClInclude Include="actors\ARect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="types\Dir.h" />
-    <ClInclude Include="types\Interval.h" />
+    <ClInclude Include="types\Force.h" />
     <ClInclude Include="types\Pos.h" />
     <ClInclude Include="types\Types.h" />
   </ItemGroup>
