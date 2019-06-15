@@ -73,7 +73,7 @@
     <IncludePath>..\libs\sdl2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\libs\sdl2\include;$(IncludePath)</IncludePath>
+    <IncludePath>.;..\libs\sdl2\include;$(IncludePath)</IncludePath>
     <LibraryPath>..\libs\sdl2\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
     <IntDir>$(SolutionDir)\.temp\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)</OutDir>
@@ -147,7 +147,8 @@
     <ClCompile Include="actors\AMaze.cpp" />
     <ClCompile Include="actors\APlayer.cpp" />
     <ClCompile Include="actors\ARect.cpp" />
-    <ClCompile Include="actors\ARoamingFoe.cpp" />
+    <ClCompile Include="actors\foes\AChasingFoe.cpp" />
+    <ClCompile Include="actors\foes\ARoamingFoe.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -160,12 +161,16 @@
     <ClInclude Include="actors\AMaze.h" />
     <ClInclude Include="actors\APlayer.h" />
     <ClInclude Include="actors\ARect.h" />
-    <ClInclude Include="actors\ARoamingFoe.h" />
+    <ClInclude Include="actors\foes\AChasingFoe.h" />
+    <ClInclude Include="actors\foes\ARoamingFoe.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="types\Dir.h" />
     <ClInclude Include="types\Force.h" />
     <ClInclude Include="types\Pos.h" />
     <ClInclude Include="types\Types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

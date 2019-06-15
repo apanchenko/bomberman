@@ -21,8 +21,11 @@
     <ClCompile Include="actors\ARect.cpp">
       <Filter>actors</Filter>
     </ClCompile>
-    <ClCompile Include="actors\ARoamingFoe.cpp">
-      <Filter>actors</Filter>
+    <ClCompile Include="actors\foes\AChasingFoe.cpp">
+      <Filter>actors\foes</Filter>
+    </ClCompile>
+    <ClCompile Include="actors\foes\ARoamingFoe.cpp">
+      <Filter>actors\foes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,8 +66,11 @@
     <ClInclude Include="types\Force.h">
       <Filter>types</Filter>
     </ClInclude>
-    <ClInclude Include="actors\ARoamingFoe.h">
-      <Filter>actors</Filter>
+    <ClInclude Include="actors\foes\AChasingFoe.h">
+      <Filter>actors\foes</Filter>
+    </ClInclude>
+    <ClInclude Include="actors\foes\ARoamingFoe.h">
+      <Filter>actors\foes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,5 +80,11 @@
     <Filter Include="actors">
       <UniqueIdentifier>{a93090ea-e636-4e12-b116-6eedd6958619}</UniqueIdentifier>
     </Filter>
+    <Filter Include="actors\foes">
+      <UniqueIdentifier>{51d5b717-4dac-4390-8660-5225d14c6ea6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

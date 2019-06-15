@@ -11,12 +11,14 @@ struct Pos
   Pos() : x(0), y(0) {}
   Pos(int _x, int _y) : x(_x), y(_y) {}
 
-  // basic math operators
-  Pos operator * (int mult)  const { return Pos(x * mult, y * mult); }
-  Pos operator / (int div)   const { return Pos(x / div, y / div); }
-  Pos operator %=(int mod)         { x %= mod; y %= mod; return *this; }
-  Pos operator + (Pos other) const { return Pos(x + other.x, y + other.y); }
-  Pos operator +=(Pos other)       { x += other.x; y += other.y; return *this; }
+  // basic operators
+  bool operator ==(Pos other) const { return x == other.x && y == other.y; }
+  Pos  operator * (int mult)  const { return Pos(x * mult, y * mult); }
+  Pos  operator / (int div)   const { return Pos(x / div, y / div); }
+  Pos  operator + (Pos other) const { return Pos(x + other.x, y + other.y); }
+  Pos  operator - (Pos other) const { return Pos(x - other.x, y - other.y); }
+  Pos  operator +=(Pos other)       { x += other.x; y += other.y; return *this; }
+  Pos  operator %=(int mod)         { x %= mod; y %= mod; return *this; }
 
   // do one step in direction
   Pos operator + (Dir dir) const
@@ -38,6 +40,12 @@ struct Pos
     if (y > 0) return Dir::Down;
     if (y < 0) return Dir::Up;
     return Dir::None;
+  }
+
+  // Manhattan distance
+  int DistanceTo(Pos other)
+  {
+    return std::abs(x - other.x) + std::abs(y - other.y);
   }
 
   // check if this pos is inside zero based rectangle with size

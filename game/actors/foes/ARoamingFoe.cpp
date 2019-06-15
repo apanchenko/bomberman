@@ -1,10 +1,10 @@
 #include "ARoamingFoe.h"
-#include "../Game.h"
+#include "Game.h"
 
 ARoamingFoe::ARoamingFoe()
   : roam_dir(Dir::None)
 {
-  SetColor(30, 0, 0);
+  SetColor(0, 0, 100);
   SetSpeed(90);
 }
 

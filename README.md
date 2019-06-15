@@ -1,12 +1,10 @@
-# bomberman
+# Bomberman
 
 Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) game written from scratch.
 
 # To do
 
-* Wall collisions
-* Wandering foe
-* Aggressive foe
+* Chasing foe
 * Drop bombs
 * Textures and animations
 * Scores
@@ -14,6 +12,14 @@ Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) gam
 * Stage exit, start new stage
 * Start menu screen
 
-# Known bugs
+# Known issues
 
-* Arrow and WASD keys work different way with multiple hits
+* Arrow and WASD keys work a little different with multiple hits
+
+# Done
+
+* Wandering foe
+* Wall collisions
+* Spawn controlled player
+* Build maze
+* Render colored rectangles

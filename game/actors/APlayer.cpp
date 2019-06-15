@@ -1,12 +1,13 @@
 #include "APlayer.h"
-#include "../Game.h"
-#include "ARoamingFoe.h"
-#include "AMaze.h"
+#include "Game.h"
+#include "actors/AMaze.h"
+#include "actors/foes/ARoamingFoe.h"
+#include "actors/foes/AChasingFoe.h"
 #include <algorithm>
 
 APlayer::APlayer()
 {
-  SetColor(200, 100, 100);
+  SetColor(255, 255, 0);
   SetSpeed(200);
 }
 
@@ -39,6 +40,10 @@ void APlayer::ProcessInputEvents(Game& game)
       else if (event.key.keysym.sym == SDLK_r)
       {
         Maze()->SpawnAtFreeCell<ARoamingFoe>();
+      }
+      else if (event.key.keysym.sym == SDLK_c)
+      {
+        Maze()->SpawnAtFreeCell<AChasingFoe>();
       }
     }
     else if (event.type == SDL_KEYUP)

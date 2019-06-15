@@ -1,5 +1,5 @@
 #pragma once
-#include "ACharacter.h"
+#include "actors/ACharacter.h"
 
 class ARoamingFoe : public ACharacter
 {

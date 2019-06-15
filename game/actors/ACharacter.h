@@ -26,3 +26,5 @@ private:
   AMaze*        maze  = nullptr;  // space we are moving in
   Uint32        speed = 10;       // move speed in pixels/second
 };
+
+// TODO: maze by reference

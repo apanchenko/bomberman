@@ -6,7 +6,7 @@ class ACellRoad : public ACell
 public:
   ACellRoad()
   {
-    SetColor(44, 176, 55); // green grass color
+    SetColor(35, 170, 45); // green grass color
     SetSolid(false);
   }
 };

@@ -2,17 +2,19 @@
 #include "ACellWall.h"
 #include "ACellRoad.h"
 #include "APlayer.h"
-#include "ARoamingFoe.h"
+#include "foes/ARoamingFoe.h"
 
 AMaze::AMaze()
-  : size(23, 13)
+  : m_size(23, 13)
+  , m_player(nullptr)
 {
-  for (int i = 0; i < size.x; ++i)
+  // build maze walls
+  for (int i = 0; i < m_size.x; ++i)
   {
-    for (int j = 0; j < size.y; ++j)
+    for (int j = 0; j < m_size.y; ++j)
     {
       ACell* cell = nullptr;
-      if (i == 0 || j == 0 || i == size.x - 1 || j == size.y - 1 ||
+      if (i == 0 || j == 0 || i == m_size.x - 1 || j == m_size.y - 1 ||
           (i % 2 == 0 && j % 2 == 0))
       {
         cell = Spawn<ACellWall>();
@@ -26,9 +28,9 @@ AMaze::AMaze()
   }
 
   // spawn player
-  auto player = Spawn<APlayer>();
-  player->SetMaze(this);
-  player->SetPos(Pos(1, 1));
+  m_player = Spawn<APlayer>();
+  m_player->SetMaze(this);
+  m_player->SetPos(Pos(1, 1));
 
   // adapt maze walls before randomly spawning foe
   AdaptNewChildren();
@@ -40,19 +42,19 @@ AMaze::AMaze()
 ACell* AMaze::GetCell(Pos pos) const
 {
   // check maze bounds
-  if (!pos.IsIn(size))
+  if (!pos.IsIn(m_size))
     return nullptr;
 
   // get cell at target position
-  return static_cast<ACell*>(GetActor(pos.x * size.y + pos.y));
+  return static_cast<ACell*>(GetActor(pos.x * m_size.y + pos.y));
 }
 
 ACell* AMaze::GetFreeCell() const
 {
   std::vector<ACell*> free_cells;
-  for (int i = 0; i < size.x; ++i)
+  for (int i = 0; i < m_size.x; ++i)
   {
-    for (int j = 0; j < size.y; ++j)
+    for (int j = 0; j < m_size.y; ++j)
     {
       ACell* cell = GetCell(Pos(i, j));
       if (cell != nullptr && !cell->IsSolid())
@@ -71,28 +73,4 @@ bool AMaze::IsSolid(Pos pos) const
 {
   ACell* target = GetCell(pos);
   return target == nullptr || target->IsSolid();
-}
-
-template<class Character>
-Character* AMaze::SpawnAtFreeCell()
-{
-  ACell* free_cell = GetFreeCell();
-  if (free_cell == nullptr)
-  {
-    SDL_Log(__FUNCTION__ ". No free cell to spawn");
-    return nullptr;
-  }
-
-  Character* character = Spawn<Character>();
-  if (character == nullptr)
-  {
-    SDL_Log(__FUNCTION__ ". Failed spawn character");
-    return nullptr;
-  }
-
-  character->SetMaze(this);
-  character->SetPos(free_cell->GetPos());
-
-  SDL_Log(__FUNCTION__ ". Spawned character at {%i, %i}", character->GetPos().x, character->GetPos().y);
-  return character;
 }
