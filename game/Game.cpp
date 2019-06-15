@@ -2,7 +2,7 @@
 #include "actors/AMaze.h"
 #include <ctime>
 
-const char* Game::TITLE = "Bomberman";
+const char* Game::TITLE = "Amazed Bomberman";
 
 Game::~Game()
 {

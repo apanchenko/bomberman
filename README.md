@@ -10,6 +10,8 @@ Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) gam
 * Sound effects
 * Stage exit, start new stage
 * Start menu screen
+* Make project more data-driven
+* Tests
 
 # Known issues
 

@@ -11,16 +11,16 @@ private:
 
 public:
   APlayer();
+  virtual void  SetPos(Pos pos) override;
+
   virtual void  Tick(Game& game) override;
 
 private:
   void          ProcessInputEvents(Game& game);
   void          ApplyForce(Game& game);
-  void          ApplySnapForce(Game& game);
+  void          ApplySnap(Game& game);
   Dir           GetDirection(SDL_KeyboardEvent key) const;
   bool          IsMoving(Game& game) const;
-
-  static const int Snap = Size / 1;
 
   std::array<Force, Dirs.size()> forces;
 };

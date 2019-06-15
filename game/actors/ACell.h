@@ -13,8 +13,8 @@ private:
 public:
   ACell();
 
-  void          SetSolid(bool solid)   { m_is_solid = solid; }
-  void          SetPos(Pos pos);
+  void          SetSolid(bool solid)    { m_is_solid = solid; }
+  virtual void  SetPos(Pos pos);
   void          SetShift(Pos shift);
 
   Pos           GetPos() const          { return m_pos; }

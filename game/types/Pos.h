@@ -9,10 +9,12 @@ struct Pos
 
   // constructors
   Pos() : x(0), y(0) {}
-  Pos(int _x, int _y) : x(_x), y(_y) {}
+  Pos(int v) : x(v), y(v) {}
+  Pos(int x, int y) : x(x), y(y) {}
 
   // basic operators
   bool operator ==(Pos other) const { return x == other.x && y == other.y; }
+  bool operator !=(Pos other) const { return x != other.x || y != other.y; }
   Pos  operator * (int mult)  const { return Pos(x * mult, y * mult); }
   Pos  operator / (int div)   const { return Pos(x / div, y / div); }
   Pos  operator + (Pos other) const { return Pos(x + other.x, y + other.y); }
@@ -33,6 +35,7 @@ struct Pos
     return *this;
   }
 
+  // convert to direction
   Dir ToDir() const
   {
     if (x > 0) return Dir::Right;
@@ -52,5 +55,18 @@ struct Pos
   bool IsIn(Pos size)
   {
     return x >= 0 && y >= 0 && x < size.x && y < size.y;
+  }
+
+  // check if this pos is inside rectangle defined by two corners
+  bool IsIn(Pos low, Pos high)
+  {
+    return x >= low.x && y >= low.y && x < high.x && y < high.y;
+  }
+
+  // clamp vector in rectangle defined by two corners
+  Pos Clamp(Pos low, Pos high)
+  {
+    return Pos(std::clamp(x, low.x, high.x),
+               std::clamp(y, low.y, high.y));
   }
 };

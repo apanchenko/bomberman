@@ -8,7 +8,16 @@
 APlayer::APlayer()
 {
   SetColor(255, 255, 0);
-  SetSpeed(200);
+  SetSpeed(100);
+}
+
+void APlayer::SetPos(Pos pos)
+{
+  if (GetPos() != pos)
+  {
+    SDL_Log("New player position {%i, %i}", pos.x, pos.y);
+  }
+  Base::SetPos(pos);
 }
 
 void APlayer::Tick(Game& game)
@@ -17,7 +26,7 @@ void APlayer::Tick(Game& game)
   if (IsMoving(game))
     ApplyForce(game);
   else
-    ApplySnapForce(game);
+    ApplySnap(game);
   Base::Tick(game);
 }
 
@@ -82,30 +91,46 @@ void APlayer::ApplyForce(Game& game)
   }
 }
 
-void APlayer::ApplySnapForce(Game& game)
+void APlayer::ApplySnap(Game& game)
 {
-  // max distance player can move in this frame
-  int path = game.GetFrameDuration() * GetSpeed() / 1000;
+  auto snap = [](int v, int dist, int& pos) -> int
+  {
+    if (v > 0)
+    {
+      if (v < Size / 2) // snap back to pos
+      {
+        v -= std::min(dist, v);
+      }
+      else // snap to next pos
+      {
+        pos++;
+        v -= Size - std::min(dist, Size - v);
+      }
+    }
+    else if (v < 0)
+    {
+      if (v > -Size / 2) // snap back to pos
+      {
+        v += std::min(dist, -v);
+      }
+      else // snap to lower next pos
+      {
+        pos--;
+        v += Size - std::min(dist, Size + v);
+      }
+    }
+    return v;
+  };
 
+  // max distance player can move in one frame
+  int dist = game.GetFrameDuration() * GetSpeed() / 1000;
+  Pos pos = GetPos();
   Pos shift = GetShift();
-  if (shift.x > 0 && shift.x < Snap)
-  {
-    shift.x -= std::min(shift.x, path);
-  }
-  else if (shift.x < 0 && shift.x > -Snap)
-  {
-    shift.x += std::min(-shift.x, path);
-  }
 
-  if (shift.y > 0 && shift.y < Snap)
-  {
-    shift.y -= std::min(shift.y, path);
-  }
-  else if (shift.y < 0 && shift.y > -Snap)
-  {
-    shift.y += std::min(-shift.y, path);
-  }
+  shift.x = snap(shift.x, dist, pos.x);
+  shift.y = snap(shift.y, dist, pos.y);
 
+  SetPos(pos);
   SetShift(shift);
 }
 
