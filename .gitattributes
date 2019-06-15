@@ -1,3 +1,2 @@
-* linguist-vendored
 libs/sdl2/include/* linguist-vendored
 *.h linguist-vendored=false
