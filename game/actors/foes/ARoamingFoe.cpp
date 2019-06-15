@@ -13,7 +13,7 @@ void ARoamingFoe::Tick(Game& game)
   // if idle - select new roaming direction
   if (GetShift().ToDir() == Dir::None)
   {
-    roam_dir = Dir(::rand() % bb::DIRCOUNT);
+    roam_dir = Dir(std::rand() % Dirs.size());
   }
 
   // move in random direction to the next pos

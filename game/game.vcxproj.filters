@@ -27,6 +27,9 @@
     <ClCompile Include="actors\foes\ARoamingFoe.cpp">
       <Filter>actors\foes</Filter>
     </ClCompile>
+    <ClCompile Include="types\Dir.cpp">
+      <Filter>types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />

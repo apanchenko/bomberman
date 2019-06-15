@@ -22,7 +22,7 @@ private:
 
   static const int Snap = Size / 1;
 
-  std::array<Force, bb::DIRCOUNT> forces;
+  std::array<Force, Dirs.size()> forces;
 };
 
 // TODO: snap to nearest pos, not original

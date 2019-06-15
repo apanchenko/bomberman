@@ -12,14 +12,15 @@ public:
   virtual void  Tick(Game& game) override;
 
 private:
+  // update current target position and search new path if need
   void          Retarget();
 
   // define Path as a sequence of adjacent positions (source .. target]
   typedef std::list<Pos> Path;
 
-  // A* 
+  // search path from source to target using A* algorithm
   Path          SearchPath(Pos source, Pos target) const;
 
-
-  Path          path; // path to player position
+  // path to player position
+  Path          path;
 };

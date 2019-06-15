@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 
 enum class Dir
 {
@@ -9,10 +10,7 @@ enum class Dir
   None
 };
 
-namespace bb
-{
-  static const int DIRCOUNT = 4;
-}
+extern const std::array<Dir, 4> Dirs;
 
 // TODO: initialize by default to None
 // TODO: random_dir function

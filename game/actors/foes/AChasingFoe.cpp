@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "actors/AMaze.h"
 #include "actors/APlayer.h"
-#include <map>
 #include <set>
 
 AChasingFoe::AChasingFoe()
@@ -88,9 +87,9 @@ AChasingFoe::Path AChasingFoe::SearchPath(Pos source, Pos target) const
     open.erase(it);
 
     // consider all neighbors
-    for (int i = 0; i < bb::DIRCOUNT; ++i)
+    for (Dir dir : Dirs)
     {
-      Node next = node.Next(Dir(i), target);
+      Node next = node.Next(dir, target);
 
       // wall detected
       if (Maze()->IsSolid(next.pos))
@@ -109,7 +108,7 @@ AChasingFoe::Path AChasingFoe::SearchPath(Pos source, Pos target) const
           if (it == closed.end())
           {
             SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, __FUNCTION__ ". Failed to trace A* path back");
-            return std::list<Pos>();
+            return Path();
           }
           next = *it;
           if (next.pos == source)
@@ -155,7 +154,7 @@ void AChasingFoe::Tick(Game& game)
     }
   }
 
-  // move in random direction to the next pos
+  // move in direction of next step in path
   if (!path.empty())
   {
     Dir dir = (path.front() - GetPos()).ToDir();
