@@ -7,7 +7,6 @@
 //  - has color
 class ARect : public Actor
 {
-private:
   typedef Actor Base;
 
 public:

@@ -18,12 +18,11 @@ public:
   Uint32              Now()            const { return time_now; }
   Uint32              GetFrameDuration()  const { return frame_duration; }
 
+  // scene
   template<class A>
-  A*                  SwitchScene()
-  {
-    scene = std::make_unique<A>();
-    return static_cast<A*>(scene.get());
-  }
+  A*                  SwitchScene();
+  template<class A>
+  A*                  GetScene() const;
 
   SDL_Renderer*       GetRenderer() { return renderer; }
 
@@ -40,3 +39,17 @@ private:
   static const int    SCREEN_WIDTH  = 1150;
   static const int    SCREEN_HEIGHT = 650;
 };
+
+
+template<class A>
+A* Game::SwitchScene()
+{
+  scene = std::make_unique<A>();
+  return GetScene<A>();
+}
+
+template<class A>
+A* Game::GetScene() const
+{
+  return static_cast<A*>(scene.get());
+}

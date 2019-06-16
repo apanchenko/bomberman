@@ -1,4 +1,39 @@
 #include "Actor.h"
+#include <algorithm>
+
+Actor* Actor::GetActor(int index) const
+{
+  if (index < 0 || index >= actors.size())
+    return nullptr;
+  return actors[index].get();
+}
+
+void Actor::Remove(Actor* victim)
+{
+  remove_actors.push_back(victim);
+}
+
+void Actor::DiscardRemovedChildren()
+{
+  for (auto victim : remove_actors)
+  {
+    auto pred = [victim](auto& actor) { return actor.get() == victim; };
+
+    auto it = std::find_if(actors.begin(), actors.end(), pred);
+    if (it != actors.end())
+    {
+      actors.erase(it);
+      continue;
+    }
+
+    it = std::find_if(new_actors.begin(), new_actors.end(), pred);
+    if (it != new_actors.end())
+    {
+      new_actors.erase(it);
+    }
+  }
+  remove_actors.clear();
+}
 
 void Actor::AdaptNewChildren()
 {
@@ -12,6 +47,7 @@ void Actor::AdaptNewChildren()
 
 void Actor::Tick(Game& game)
 {
+  DiscardRemovedChildren();
   AdaptNewChildren();
 
   // tick children

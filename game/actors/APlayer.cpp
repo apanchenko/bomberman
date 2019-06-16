@@ -3,12 +3,13 @@
 #include "actors/AMaze.h"
 #include "actors/foes/ARoamingFoe.h"
 #include "actors/foes/AChasingFoe.h"
+#include "actors/bombs/ABomb.h"
 #include <algorithm>
 
 APlayer::APlayer()
 {
   SetColor(255, 255, 0);
-  SetSpeed(100);
+  SetSpeed(200);
 }
 
 void APlayer::SetPos(Pos pos)
@@ -53,6 +54,12 @@ void APlayer::ProcessInputEvents(Game& game)
       else if (event.key.keysym.sym == SDLK_c)
       {
         Maze()->SpawnAtFreeCell<AChasingFoe>();
+      }
+      else if (event.key.keysym.sym == SDLK_SPACE)
+      {
+        ABomb* bomb = Maze()->Spawn<ABomb>();
+        bomb->SetPos(GetPos());
+        bomb->Refresh(game);
       }
     }
     else if (event.type == SDL_KEYUP)

@@ -79,7 +79,7 @@
     <OutDir>$(SolutionDir)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\libs\sdl2\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.;..\libs\sdl2\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>..\libs\sdl2\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
     <IntDir>$(SolutionDir)\.temp\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)</OutDir>
@@ -147,6 +147,8 @@
     <ClCompile Include="actors\AMaze.cpp" />
     <ClCompile Include="actors\APlayer.cpp" />
     <ClCompile Include="actors\ARect.cpp" />
+    <ClCompile Include="actors\bombs\ABlast.cpp" />
+    <ClCompile Include="actors\bombs\ABomb.cpp" />
     <ClCompile Include="actors\foes\AChasingFoe.cpp" />
     <ClCompile Include="actors\foes\ARoamingFoe.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -159,9 +161,12 @@
     <ClInclude Include="actors\ACellWall.h" />
     <ClInclude Include="actors\ACharacter.h" />
     <ClInclude Include="actors\Actor.h" />
+    <ClInclude Include="actors\ALifespan.h" />
     <ClInclude Include="actors\AMaze.h" />
     <ClInclude Include="actors\APlayer.h" />
     <ClInclude Include="actors\ARect.h" />
+    <ClInclude Include="actors\bombs\ABlast.h" />
+    <ClInclude Include="actors\bombs\ABomb.h" />
     <ClInclude Include="actors\foes\AChasingFoe.h" />
     <ClInclude Include="actors\foes\ARoamingFoe.h" />
     <ClInclude Include="Game.h" />

@@ -24,8 +24,6 @@ public:
   // square cell size equal for all cells
   static const int Size = 50;
 
-  virtual void  Tick(Game& game) override;
-
 private:
   Pos           m_pos;      // position in maze grid
   Pos           m_shift;    // shift from pos in pixels

@@ -17,8 +17,3 @@ void ACell::SetShift(Pos shift)
   m_shift = shift;
   SetCoord(m_pos * Size + m_shift);
 }
-
-void ACell::Tick(Game& game)
-{
-  Base::Tick(game);
-}
