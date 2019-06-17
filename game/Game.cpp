@@ -45,7 +45,8 @@ bool Game::Init()
 
   screenSurface = SDL_GetWindowSurface(window);
 
-  SwitchScene<AMaze>();
+  scene = std::make_unique<AMaze>(*this);
+
   return true;
 }
 
@@ -54,6 +55,7 @@ void Game::Run()
   Uint32 time_last = SDL_GetTicks();
   while (!quit)
   {
+    ProcessInputEvents();
     SDL_RenderClear(renderer);
 
     time_now = SDL_GetTicks();
@@ -67,8 +69,19 @@ void Game::Run()
   SDL_Log(__FUNCTION__ ". End of the game");
 }
 
-void Game::Quit()
+void Game::ProcessInputEvents()
 {
-  SDL_Log(__FUNCTION__);
-  quit = true;
+  SDL_Event event;
+  while (SDL_PollEvent(&event) != 0)
+  {
+    if (event.type == SDL_QUIT ||
+       (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
+    {
+      quit = true;
+    }
+    else if (player != nullptr)
+    {
+      player->ProcessInputEvent(*this, event);
+    }
+  }
 }

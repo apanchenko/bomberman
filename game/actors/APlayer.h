@@ -11,12 +11,14 @@ private:
 
 public:
   APlayer();
-  virtual void  SetPos(Pos pos) override;
 
+  virtual void  Born(Game& game) override;
+  virtual void  Die(Game& game) override;
+  void          ProcessInputEvent(Game& game, SDL_Event& event);
+  virtual void  SetPos(Pos pos) override;
   virtual void  Tick(Game& game) override;
 
 private:
-  void          ProcessInputEvents(Game& game);
   void          ApplyForce(Game& game);
   void          ApplySnap(Game& game);
   Dir           GetDirection(SDL_KeyboardEvent key) const;

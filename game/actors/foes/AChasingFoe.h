@@ -2,6 +2,8 @@
 #include "actors/ACharacter.h"
 #include <list>
 
+class APlayer;
+
 class AChasingFoe : public ACharacter
 {
   typedef ACharacter Base;
@@ -13,7 +15,7 @@ public:
 
 private:
   // update current target position and search new path if need
-  void          Retarget();
+  void          Retarget(APlayer* player);
 
   // define Path as a sequence of adjacent positions (source .. target]
   typedef std::list<Pos> Path;

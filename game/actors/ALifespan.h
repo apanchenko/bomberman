@@ -1,7 +1,6 @@
 #pragma once
 #include "types/Types.h"
 #include "Game.h"
-#include "actors/AMaze.h"
 
 template<class A>
 class ALifespan : public A
@@ -14,9 +13,10 @@ public:
     , death_moment(bb::NEVER)
   {}
 
+  virtual void  Die(Game& game) override        { Base::Die(game); }
+
   void          SetLifespan(bb::Time _lifespan) { lifespan = _lifespan; }
   void          Refresh(Game& game)             { death_moment = game.Now() + lifespan; }
-  virtual void  Die(Game& game)                 { game.GetScene<AMaze>()->Remove(this); }
 
   virtual void  Tick(Game& game) override;
 

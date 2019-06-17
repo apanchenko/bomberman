@@ -7,20 +7,18 @@ class APlayer;
 class AMaze : public Actor
 {
 public:
-  AMaze();
+                AMaze(Game& game);
 
-  Pos           GetSize()         const { return m_size; }
+  Pos           GetSize()         const { return size; }
   ACell*        GetCell(Pos pos)  const;
   ACell*        GetFreeCell()     const;
   Material      GetMaterial(Pos pos) const;
-  APlayer*      Player()          const { return m_player; }
 
   template<class Character>
   Character*    SpawnAtFreeCell();
 
 private:
-  const Pos     m_size;
-  APlayer*      m_player;
+  const Pos     size;
 };
 
 

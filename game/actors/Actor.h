@@ -13,6 +13,10 @@ class Actor
 public:
   virtual      ~Actor() {}
 
+  // actor lifecycle
+  virtual void  Born(Game& game);
+  virtual void  Die(Game& game);
+
   // add new actor
   template<class A>
   A*            Spawn();
@@ -35,9 +39,9 @@ public:
   virtual void  Tick(Game& game);
 
 protected:
-  void          AdaptNewChildren();
+  void          AdaptNewChildren(Game& game);
   void          DiscardRemovedChildren();
-  void          SubstututeChildren();
+  void          SubstututeChildren(Game& game);
 
 private:
   std::vector<UActor> actors;        // child actors

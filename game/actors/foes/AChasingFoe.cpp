@@ -10,9 +10,8 @@ AChasingFoe::AChasingFoe()
   SetSpeed(90);
 }
 
-void AChasingFoe::Retarget()
+void AChasingFoe::Retarget(APlayer* player)
 {
-  APlayer* player = Maze()->Player();
   if (player == nullptr)
   {
     // target not found - stop
@@ -145,7 +144,7 @@ void AChasingFoe::Tick(Game& game)
   // if idle - update path to target
   if (GetShift().ToDir() == Dir::None)
   {
-    Retarget();
+    Retarget(game.Player());
 
     // start next step on path
     if (!path.empty() && path.front() == GetPos())

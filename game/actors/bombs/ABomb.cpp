@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "actors/ACellGrass.h"
 #include "actors/ACharacter.h"
+#include "actors/AMaze.h"
 
 ABomb::ABomb()
 {
@@ -48,7 +49,7 @@ void ABomb::Explode(Game& game, Pos pos)
     Dir vicdir = victim->GetShift().ToDir();
     if (vicpos == pos || vicpos + vicdir == pos)
     {
-      maze->Remove(victim);
+      victim->Die(game);
     }
   }
 

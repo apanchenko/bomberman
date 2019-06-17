@@ -12,6 +12,18 @@ APlayer::APlayer()
   SetSpeed(200);
 }
 
+void APlayer::Born(Game& game)
+{
+  game.SetPlayer(this);
+  Base::Born(game);
+}
+
+void APlayer::Die(Game& game)
+{
+  game.SetPlayer(nullptr);
+  Base::Die(game);
+}
+
 void APlayer::SetPos(Pos pos)
 {
   if (GetPos() != pos)
@@ -23,7 +35,6 @@ void APlayer::SetPos(Pos pos)
 
 void APlayer::Tick(Game& game)
 {
-  ProcessInputEvents(game);
   if (IsMoving(game))
     ApplyForce(game);
   else
@@ -31,48 +42,36 @@ void APlayer::Tick(Game& game)
   Base::Tick(game);
 }
 
-void APlayer::ProcessInputEvents(Game& game)
+void APlayer::ProcessInputEvent(Game& game, SDL_Event& event)
 {
-  SDL_Event event;
-  while (SDL_PollEvent(&event) != 0)
+  if (event.type == SDL_KEYDOWN)
   {
-    if (event.type == SDL_KEYDOWN)
+    Dir dir = GetDirection(event.key);
+    if (dir != Dir::None)
     {
-      Dir dir = GetDirection(event.key);
-      if (dir != Dir::None)
-      {
-        forces[(int)dir] = Force(dir, event.key.timestamp);
-      }
-      else if (event.key.keysym.sym == SDLK_ESCAPE)
-      {
-        game.Quit();
-      }
-      else if (event.key.keysym.sym == SDLK_r)
-      {
-        Maze()->SpawnAtFreeCell<ARoamingFoe>();
-      }
-      else if (event.key.keysym.sym == SDLK_c)
-      {
-        Maze()->SpawnAtFreeCell<AChasingFoe>();
-      }
-      else if (event.key.keysym.sym == SDLK_SPACE)
-      {
-        ABomb* bomb = Maze()->Spawn<ABomb>();
-        bomb->SetPos(GetPos());
-        bomb->Refresh(game);
-      }
+      forces[(int)dir] = Force(dir, event.key.timestamp);
     }
-    else if (event.type == SDL_KEYUP)
+    else if (event.key.keysym.sym == SDLK_r)
     {
-      Dir dir = GetDirection(event.key);
-      if (dir != Dir::None)
-      {
-        forces[(int)dir].stop = event.key.timestamp;
-      }
+      Maze()->SpawnAtFreeCell<ARoamingFoe>();
     }
-    else if (event.type == SDL_QUIT)
+    else if (event.key.keysym.sym == SDLK_c)
     {
-      game.Quit();
+      Maze()->SpawnAtFreeCell<AChasingFoe>();
+    }
+    else if (event.key.keysym.sym == SDLK_SPACE)
+    {
+      ABomb* bomb = Maze()->Spawn<ABomb>();
+      bomb->SetPos(GetPos());
+      bomb->Refresh(game);
+    }
+  }
+  else if (event.type == SDL_KEYUP)
+  {
+    Dir dir = GetDirection(event.key);
+    if (dir != Dir::None)
+    {
+      forces[(int)dir].stop = event.key.timestamp;
     }
   }
 }

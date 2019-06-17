@@ -1,4 +1,6 @@
 #include "ACell.h"
+#include "Game.h"
+#include "actors/AMaze.h"
 
 ACell::ACell()
   : m_material(Material::Grass)
