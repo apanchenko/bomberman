@@ -13,13 +13,13 @@ Try to destroy all carton boxes while avoiding foes.
 
 # To do
 
+* Tests
 * Textures and animations
 * Scores
 * Sound effects
 * Stage exit, start new stage
 * Start menu screen
 * Make project more data-driven
-* Tests
 
 # Known issues
 
