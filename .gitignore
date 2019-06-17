@@ -4,3 +4,5 @@
 *.exe
 *.ilk
 *.pdb
+*.ipdb
+*.iobj

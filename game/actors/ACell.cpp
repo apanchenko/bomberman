@@ -1,9 +1,14 @@
 #include "ACell.h"
 
 ACell::ACell()
-  : m_is_solid(false)
+  : m_material(Material::Grass)
 {
   SetSize(Pos(Size, Size));
+}
+
+void ACell::SetMaterial(Material material)
+{
+  m_material = material;
 }
 
 void ACell::SetPos(Pos pos)

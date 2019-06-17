@@ -8,6 +8,6 @@ public:
   ACellWall()
   {
     SetColor(193, 193, 193); // concrete color
-    SetSolid(true);
+    SetMaterial(Material::Concrete);
   }
 };

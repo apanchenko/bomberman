@@ -4,7 +4,6 @@ Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) gam
 
 # To do
 
-* Drop bombs
 * Textures and animations
 * Scores
 * Sound effects
@@ -19,6 +18,7 @@ Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) gam
 
 # Done
 
+* Drop bombs
 * Chasing foe
 * Wandering foe
 * Wall collisions

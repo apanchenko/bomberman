@@ -12,7 +12,7 @@ public:
   Pos           GetSize()         const { return m_size; }
   ACell*        GetCell(Pos pos)  const;
   ACell*        GetFreeCell()     const;
-  bool          IsSolid(Pos pos)  const;
+  Material      GetMaterial(Pos pos) const;
   APlayer*      Player()          const { return m_player; }
 
   template<class Character>

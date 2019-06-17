@@ -1,13 +1,13 @@
 #pragma once
 #include "ACell.h"
 
-class ACellRoad : public ACell
+class ACellGrass : public ACell
 {
 public:
-  ACellRoad()
+  ACellGrass()
   {
     SetColor(35, 170, 45); // green grass color
-    SetSolid(false);
+    SetMaterial(Material::Grass);
   }
 };
 

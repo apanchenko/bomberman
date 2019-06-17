@@ -157,7 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actors\ACell.h" />
-    <ClInclude Include="actors\ACellRoad.h" />
+    <ClInclude Include="actors\ACellCarton.h" />
+    <ClInclude Include="actors\ACellGrass.h" />
     <ClInclude Include="actors\ACellWall.h" />
     <ClInclude Include="actors\ACharacter.h" />
     <ClInclude Include="actors\Actor.h" />

@@ -9,10 +9,10 @@ bool ACharacter::CanMove(Dir dir) const
 
   bool opposite = dir != shift_dir && ((int)dir % 2) == ((int)shift_dir % 2);
 
-  if (!opposite && maze->IsSolid(pos + dir))
+  if (!opposite && maze->GetMaterial(pos + dir) != Material::Grass)
     return false;
 
-  if (dir != shift_dir && maze->IsSolid(pos + shift_dir + dir))
+  if (dir != shift_dir && maze->GetMaterial(pos + shift_dir + dir) != Material::Grass)
     return false;
 
   return true;

@@ -91,8 +91,8 @@ AChasingFoe::Path AChasingFoe::SearchPath(Pos source, Pos target) const
     {
       Node next = node.Next(dir, target);
 
-      // wall detected
-      if (Maze()->IsSolid(next.pos))
+      // obstacle detected
+      if (Maze()->GetMaterial(next.pos)!=Material::Grass)
         continue;
 
       // if target reached - return path

@@ -45,10 +45,21 @@ void Actor::AdaptNewChildren()
   new_actors.clear();
 }
 
+void Actor::SubstututeChildren()
+{
+  for (auto& substitutor : replace_actors)
+  {
+    auto it = actors.erase(actors.begin() + substitutor.first);
+    actors.insert(it, std::move(substitutor.second));
+  }
+  replace_actors.clear();
+}
+
 void Actor::Tick(Game& game)
 {
   DiscardRemovedChildren();
   AdaptNewChildren();
+  SubstututeChildren();
 
   // tick children
   for (const UActor& actor : actors)

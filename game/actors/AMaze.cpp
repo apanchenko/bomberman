@@ -1,29 +1,38 @@
 #include "AMaze.h"
 #include "ACellWall.h"
-#include "ACellRoad.h"
+#include "ACellGrass.h"
+#include "ACellCarton.h"
 #include "APlayer.h"
 #include "foes/ARoamingFoe.h"
+#include "foes/AChasingFoe.h"
 
 AMaze::AMaze()
   : m_size(23, 13)
   , m_player(nullptr)
 {
+  Pos player_pos(1, 1);
+
   // build maze walls
   for (int i = 0; i < m_size.x; ++i)
   {
     for (int j = 0; j < m_size.y; ++j)
     {
+      Pos pos(i, j);
       ACell* cell = nullptr;
       if (i == 0 || j == 0 || i == m_size.x - 1 || j == m_size.y - 1 ||
           (i % 2 == 0 && j % 2 == 0))
       {
         cell = Spawn<ACellWall>();
       }
+      else if (pos != player_pos && std::rand() % 100 < 30)
+      {
+        cell = Spawn<ACellCarton>();
+      }
       else
       {
-        cell = Spawn<ACellRoad>();
+        cell = Spawn<ACellGrass>();
       }
-      cell->SetPos(Pos(i, j));
+      cell->SetPos(pos);
     }
   }
 
@@ -35,8 +44,10 @@ AMaze::AMaze()
   // adapt maze walls before randomly spawning foe
   AdaptNewChildren();
 
-  // spawn foe
+  // spawn some foes
   SpawnAtFreeCell<ARoamingFoe>();
+  SpawnAtFreeCell<ARoamingFoe>();
+  SpawnAtFreeCell<AChasingFoe>();
 }
 
 ACell* AMaze::GetCell(Pos pos) const
@@ -46,7 +57,7 @@ ACell* AMaze::GetCell(Pos pos) const
     return nullptr;
 
   // get cell at target position
-  return static_cast<ACell*>(GetActor(pos.x * m_size.y + pos.y));
+  return static_cast<ACell*>(GetActor(pos.ToIndex(m_size)));
 }
 
 ACell* AMaze::GetFreeCell() const
@@ -57,7 +68,7 @@ ACell* AMaze::GetFreeCell() const
     for (int j = 0; j < m_size.y; ++j)
     {
       ACell* cell = GetCell(Pos(i, j));
-      if (cell != nullptr && !cell->IsSolid())
+      if (cell != nullptr && cell->GetMaterial()==Material::Grass)
         free_cells.push_back(cell);
     }
   }
@@ -69,8 +80,14 @@ ACell* AMaze::GetFreeCell() const
   return free_cells[index];
 }
 
-bool AMaze::IsSolid(Pos pos) const
+Material AMaze::GetMaterial(Pos pos) const
 {
   ACell* target = GetCell(pos);
-  return target == nullptr || target->IsSolid();
+  if (target == nullptr)
+  {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, __FUNCTION__ ". No cell at {%i, %i}", pos.x, pos.y);
+    return Material::Concrete;
+  }
+    
+  return target->GetMaterial();
 }

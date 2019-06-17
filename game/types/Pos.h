@@ -45,26 +45,32 @@ struct Pos
     return Dir::None;
   }
 
+  // calculate 1D array index of this position in 2D grid
+  int ToIndex(Pos grid_size) const
+  {
+    return x * grid_size.y + y;
+  }
+
   // Manhattan distance
-  int DistanceTo(Pos other)
+  int DistanceTo(Pos other) const
   {
     return std::abs(x - other.x) + std::abs(y - other.y);
   }
 
   // check if this pos is inside zero based rectangle with size
-  bool IsIn(Pos size)
+  bool IsIn(Pos size) const
   {
     return x >= 0 && y >= 0 && x < size.x && y < size.y;
   }
 
   // check if this pos is inside rectangle defined by two corners
-  bool IsIn(Pos low, Pos high)
+  bool IsIn(Pos low, Pos high) const
   {
     return x >= low.x && y >= low.y && x < high.x && y < high.y;
   }
 
   // clamp vector in rectangle defined by two corners
-  Pos Clamp(Pos low, Pos high)
+  Pos Clamp(Pos low, Pos high) const
   {
     return Pos(std::clamp(x, low.x, high.x),
                std::clamp(y, low.y, high.y));

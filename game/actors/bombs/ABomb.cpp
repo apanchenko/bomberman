@@ -1,6 +1,7 @@
 #include "ABomb.h"
 #include "ABlast.h"
 #include "Game.h"
+#include "actors/ACellGrass.h"
 
 ABomb::ABomb()
 {
@@ -13,11 +14,23 @@ void ABomb::Die(Game& game)
   Base::Die(game);
 
   AMaze* maze = game.GetScene<AMaze>();
+  Pos maze_size = maze->GetSize();
   for (Dir dir : Dirs)
   {
     Pos pos = GetPos() + dir;
-    if (!maze->IsSolid(pos))
-      SpawnBlast(game, pos);
+    ACell* cell = maze->GetCell(pos);
+    if (cell == nullptr)
+    {
+      SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, __FUNCTION__ ". No cell at {%i, %i}", pos.x, pos.y);
+      continue;
+    }
+
+    if (cell->GetMaterial() == Material::Carton)
+    {
+      ACellGrass* grass = maze->SpawnAndReplace<ACellGrass>(pos.ToIndex(maze_size));
+      grass->SetPos(pos);
+    }
+    SpawnBlast(game, pos);
   }
   SpawnBlast(game, GetPos());
 }
