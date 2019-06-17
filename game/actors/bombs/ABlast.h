@@ -8,7 +8,5 @@ class ABlast : public ALifespan<ACell>
 
 public:
   ABlast();
-
-  virtual void  Die(Game& game) override;
 };
 

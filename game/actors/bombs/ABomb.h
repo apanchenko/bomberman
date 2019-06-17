@@ -13,5 +13,5 @@ public:
   virtual void  Die(Game& game) override;
 
 private:
-  void          SpawnBlast(Game& game, Pos pos);
+  void          Explode(Game& game, Pos pos);
 };

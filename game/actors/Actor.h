@@ -11,6 +11,8 @@ class Game;
 class Actor
 {
 public:
+  virtual      ~Actor() {}
+
   // add new actor
   template<class A>
   A*            Spawn();
@@ -19,11 +21,15 @@ public:
   template<class A>
   A*            SpawnAndReplace(int index);
 
+  // remove specific actor
+  void          Remove(Actor* actor);
+
   // get actor by index
   Actor*        GetActor(int index) const;
 
-  // remove specific actor
-  void          Remove(Actor* actor);
+  // get all child actors of type A
+  template<class A>
+  std::vector<A*> FindAll() const;
 
   // tick one more precious moment
   virtual void  Tick(Game& game);
@@ -55,4 +61,17 @@ A* Actor::SpawnAndReplace(int index)
 {
   replace_actors.push_back(std::make_pair(index, std::make_unique<A>()));
   return static_cast<A*>(replace_actors.back().second.get());
+}
+
+template<class A>
+std::vector<A*> Actor::FindAll() const
+{
+  std::vector<A*> result;
+  for (const UActor& actor : actors)
+  {
+    A* a = dynamic_cast<A*>(actor.get());
+    if (a != nullptr)
+      result.push_back(a);
+  }
+  return result;
 }
