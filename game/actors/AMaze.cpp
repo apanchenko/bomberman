@@ -23,7 +23,8 @@ AMaze::AMaze(Game& game)
       {
         cell = Spawn<ACellWall>();
       }
-      else if (pos != player_pos && std::rand() % 100 < 30)
+      else if (pos != player_pos && std::rand() % 100 < 30  // chance to spawn carton
+            && pos.x > 3 && pos.y > 3)                      // space for player
       {
         cell = Spawn<ACellCarton>();
       }
