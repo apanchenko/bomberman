@@ -18,7 +18,7 @@ Install [CMake](https://cmake.org) and [Build Tools for Visual Studio](https://v
 
 ```bat
 cmake -S src -B build
-cmake --build build
+cmake --build build --config Release
 ```
 
 ## To do
