@@ -3,6 +3,7 @@
 Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) game written from scratch.
 
 You are a yellow hero starting in top left corner.
+
 - Press arrows to move
 - Press 'Space' to drop bomb
 - Press 'R' to add roaming foe
@@ -11,26 +12,35 @@ You are a yellow hero starting in top left corner.
 
 Try to destroy all carton boxes while avoiding foes.
 
-# To do
+## How to Build
 
-* Tests
-* Textures and animations
-* Scores
-* Sound effects
-* Stage exit, start new stage
-* Start menu screen
-* Make project more data-driven
+Install [CMake](https://cmake.org) and [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/), run then:
 
-# Known issues
+```bat
+cmake -S src -B build
+cmake --build build
+```
 
-* Arrow and WASD keys work a little different with multiple hits
+## To do
 
-# Done
+- Tests
+- Textures and animations
+- Scores
+- Sound effects
+- Stage exit, start new stage
+- Start menu screen
+- Make project more data-driven
 
-* Drop bombs
-* Chasing foe
-* Wandering foe
-* Wall collisions
-* Spawn controlled player
-* Build maze
-* Render colored rectangles
+## Known issues
+
+- Arrow and WASD keys work a little different with multiple hits
+
+## Done
+
+- Drop bombs
+- Chasing foe
+- Wandering foe
+- Wall collisions
+- Spawn controlled player
+- Build maze
+- Render colored rectangles
