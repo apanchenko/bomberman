@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman?svg=true)](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman?svg=true)
+
 # Bomberman
 
 Clone of a well known [Bomberman](https://m.youtube.com/watch?v=3smytj9Bu_E) game written from scratch.
