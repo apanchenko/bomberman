@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman?svg=true)](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman?svg=true)](https://ci.appveyor.com/api/projects/status/github/apanchenko/bomberman)
 
 # Bomberman
 
