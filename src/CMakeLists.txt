@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.0.0)
 project(bomberman VERSION 0.1.0 LANGUAGES CXX)
 
 # define target executable
-file(GLOB_RECURSE bomberman_src bomberman/*.cpp)
-add_executable(bomberman WIN32 ${bomberman_src})
+cmake_policy(SET CMP0076 NEW)
+add_executable(bomberman WIN32 "")
+add_subdirectory(bomberman)
 
 # use modern C++ standard
 set_target_properties(bomberman PROPERTIES
@@ -14,6 +15,8 @@ set_target_properties(bomberman PROPERTIES
 target_include_directories(bomberman
   PRIVATE bomberman
   PRIVATE sdl2/include)
+
+message(WARNING ${CMAKE_GENERATOR_PLATFORM})
 
 # link with sdl2 library
 add_library(sdl2 STATIC IMPORTED)

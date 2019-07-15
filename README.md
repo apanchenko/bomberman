@@ -17,7 +17,7 @@ Try to destroy all carton boxes while avoiding foes.
 Install [CMake](https://cmake.org) and [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/), run then:
 
 ```bat
-cmake -S src -B build
+cmake -S src -B build -A x64
 cmake --build build --config Release
 ```
 

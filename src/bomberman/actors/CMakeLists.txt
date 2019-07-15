@@ -1,0 +1,21 @@
+add_subdirectory(bombs)
+add_subdirectory(foes)
+
+target_sources(bomberman
+    PRIVATE
+        ACell.cpp
+        ACell.h
+        ACellCarton.h
+        ACellGrass.h
+        ACellWall.h
+        ACharacter.cpp
+        ACharacter.h
+        Actor.cpp
+        Actor.h
+        ALifespan.h
+        AMaze.cpp
+        AMaze.h
+        APlayer.cpp
+        APlayer.h
+        ARect.cpp
+        ARect.h)
