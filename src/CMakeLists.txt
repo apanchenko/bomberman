@@ -20,8 +20,13 @@ message(WARNING ${CMAKE_GENERATOR_PLATFORM})
 
 # link with sdl2 library
 add_library(sdl2 STATIC IMPORTED)
-set_target_properties(sdl2 PROPERTIES
-  IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/sdl2/lib/x64/SDL2.lib)
+
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+  set_target_properties(sdl2 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/sdl2/lib/x64/SDL2.lib)
+else ()
+  set_target_properties(sdl2 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/sdl2/lib/x86/SDL2.lib)
+endif ()
+
 target_link_libraries(bomberman sdl2)
 
 # copy resulting executable into root folder for convenience
