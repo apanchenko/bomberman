@@ -15,7 +15,7 @@ void Actor::Die(Game& game)
 
 Actor* Actor::GetActor(int index) const
 {
-  if (index < 0 || index >= actors.size())
+  if (index < 0 || index >= (int) actors.size())
     return nullptr;
   return actors[index].get();
 }
