@@ -14,6 +14,7 @@ configuration:
   - Release
 
 before_build:
+  - git submodule update --init --recursive
   - if exist build RMDIR /S /Q build
   - mkdir build
   - cmake -Bbuild -G "%generator%" -A %platform% -DCMAKE_BUILD_TYPE=%configuration% -Wdev -Wdeprecated
