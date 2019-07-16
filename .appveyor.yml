@@ -16,7 +16,7 @@ configuration:
 before_build:
   - if exist build RMDIR /S /Q build
   - mkdir build
-  - cmake -Ssrc -Bbuild -G "%generator%" -A %platform% -DCMAKE_BUILD_TYPE=%configuration% -Wdev -Wdeprecated
+  - cmake -Bbuild -G "%generator%" -A %platform% -DCMAKE_BUILD_TYPE=%configuration% -Wdev -Wdeprecated
 
 build:
   project: build/bomberman.sln
