@@ -5,6 +5,8 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       generator: "Visual Studio 16 2019"
 
+version: '0.1.{build}'
+
 platform:
   - Win32
   - x64
@@ -12,6 +14,9 @@ platform:
 configuration:
   - Debug
   - Release
+
+matrix:
+  fast_finish: true
 
 before_build:
   - git submodule update --init --recursive
@@ -23,3 +28,18 @@ build:
   project: build/bomberman.sln
   parallel: true
   verbosity: minimal
+
+artifacts:
+  - path: build\Release\bomberman.exe
+    name: bomberman.exe
+
+deploy:
+  release: v$(appveyor_repo_tag_name)
+  artifact: build\Release\bomberman.exe
+  description: 'Release description'
+  provider: GitHub
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only
