@@ -34,7 +34,7 @@ artifacts:
     name: bomberman.exe
 
 deploy:
-  release: v$(appveyor_repo_tag_name)
+  release: $(appveyor_repo_tag_name)
   artifact: build\Release\bomberman.exe
   description: 'Release description'
   provider: GitHub
@@ -43,7 +43,6 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch: master
     generator: "Visual Studio 16 2019"
     platform: x64
     configuration: Release
