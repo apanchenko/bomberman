@@ -20,7 +20,5 @@ target_include_directories(bomberman PRIVATE src)
 
 target_link_libraries(bomberman SDL2-static) # SDL2main SDL2-static
 
-# copy resulting executable into root folder for convenience
-#set_target_properties(bomberman PROPERTIES
-#  RUNTIME_OUTPUT_DIRECTORY_DEBUG ..
-#  RUNTIME_OUTPUT_DIRECTORY_RELEASE ..)
+# Tests
+add_subdirectory(tests)
